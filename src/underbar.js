@@ -183,20 +183,17 @@
 
     if (accumulator !== undefined) {
       result = accumulator;
-      // _.each(collection, function(element) {
-      //   result = iterator(accumulator, element);
-      // });
+      _.each(collection, function(element) {
+        result = iterator(result, element);
+      });
     } else {
+      // if no accumulator, iterator starts at second item of array
       result = collection[0];
-
-      console.log('current collection: ' + collection);
-      console.log(accumulator);
+      var copyOfCollection = collection.slice(1);
+      _.each(copyOfCollection, function(element) {
+        result = iterator(result, element);
+      });
     }
-    // if no accumulator, iterator starts at second item of array
-    _.each(collection, function(element) {
-      result = iterator(result, element);
-    });
-
 
     return result;
 
